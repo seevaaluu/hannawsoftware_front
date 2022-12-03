@@ -35,6 +35,10 @@
                     </v-col>
 
                     <v-col cols="12" md="12">
+                      <v-text-field label="Email" filled v-model="personalData.email" :rules="rules" />
+                    </v-col>
+
+                    <v-col cols="12" md="12">
                       <v-text-field label="Nombre" filled v-model="personalData.name" :rules="rules" />
                     </v-col>
 
@@ -44,6 +48,10 @@
 
                     <v-col cols="12" md="12">
                       <v-text-field label="Apellido materno" filled v-model="personalData.second_last_name" :rules="rules" />
+                    </v-col>
+
+                    <v-col cols="12" md="12">
+                      <v-text-field label="Fecha de nacimiento" type="date" filled v-model="personalData.birthdate" :rules="rules" />
                     </v-col>
                   </v-row>
                 </v-container>
@@ -73,7 +81,10 @@
                         <v-spacer></v-spacer>
                         <v-checkbox 
                           v-model="selected" 
-                          :value="getPokemonId(item.url)"
+                          :value="{
+                            'id': getPokemonId(item.url),
+                            'name': item.name
+                          }"
                         />
                       </v-card-actions>
                     </v-card>
@@ -84,7 +95,7 @@
 
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="#f4b615" :disabled="(selected.length < 6)" style="color: white;" @click="step++">
+              <v-btn color="#f4b615" :disabled="(selected.length < 6)" style="color: white;" @click="storeTrainerPokemon">
                 Guardar
               </v-btn>
             </v-card-actions>
@@ -130,6 +141,16 @@
         let pokemonId = url.split('/').reverse()[1]
         let urlPokemon = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokemonId}.png`;
         return urlPokemon;
+      },
+      storeTrainerPokemon: function() {
+        axios.post(' http://localhost:8000/api/entrenadores', {
+          ...this.personalData,
+          'pokemons': this.selected
+        })
+        .then(response => {
+          console.log(response.data)
+        })
+        .catch(error => console.log(error))
       }
     },
     created() {

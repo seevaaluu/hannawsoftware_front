@@ -103,6 +103,10 @@
         </v-window>
       </v-card-text>
     </v-card>
+    <!--  -->
+    <v-snackbar :value="snackbar.visible" absolute bottom color="success" outlined right>
+      {{ snackbar.text }}
+    </v-snackbar>
   </v-card>
 </template>
 
@@ -114,6 +118,10 @@
     data: () => ({
       step: 1,
       personalData: {},
+      snackbar: {
+        visible: false,
+        text: null
+      },
       selected: [],
       checkbox: false,
       data: [],
@@ -148,7 +156,11 @@
           'pokemons': this.selected
         })
         .then(response => {
-          console.log(response.data)
+          this.snackbar.visible = true;
+          this.snackbar.text = response.data.message_text;
+          setTimeout(() => {
+            location.reload(); 
+          }, 1500);
         })
         .catch(error => console.log(error))
       }

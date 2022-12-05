@@ -151,7 +151,7 @@
         return urlPokemon;
       },
       storeTrainerPokemon: function() {
-        axios.post(' http://localhost:8000/api/entrenadores', {
+        axios.post('http://localhost:8000/api/entrenadores', {
           ...this.personalData,
           'pokemons': this.selected
         })

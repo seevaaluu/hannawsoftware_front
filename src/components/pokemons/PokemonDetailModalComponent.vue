@@ -28,8 +28,15 @@
                 />
               </v-col>
               <v-col cols="12" md="10" class="fill-height d-flex flex-column justify-center align-center">
-                <v-btn v-for="(item, i) in details.types" color="white" :key="i" class="mt-2" outlined x-small
-                  dark>
+                <v-btn 
+                  v-for="(item, i) in details.types" 
+                  color="white" 
+                  :key="i" 
+                  class="mt-20 btn-badge" 
+                  outlined 
+                  x-small
+                  dark
+                >
                   {{ item.type.name }}
                 </v-btn>
               </v-col>
@@ -117,6 +124,10 @@ import axios from 'axios';
     padding: 2%;
     border-radius: 14px;
     margin: 2%;
+  }
+
+  .btn-badge {
+    pointer-events: none;
   }
 
   .stats-label {

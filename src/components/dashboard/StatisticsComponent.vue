@@ -10,6 +10,19 @@
           <statistic-card title="Pokemones" :quantity="stats.pokemons" color="#268cc8" />
         </v-col>
       </v-row>
+
+      <v-row>
+        <v-col cols="12" sm="12">
+          <v-card>
+            <v-toolbar flat>
+              <v-toolbar-title>Los pokemones mas elegidos</v-toolbar-title>
+            </v-toolbar>
+            <v-card-text>
+              <poke-charts :options="options" />
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
     </v-container>
   </v-container>
 </template>
@@ -31,6 +44,23 @@
     },
     components: {
       StatisticCard
+    },
+    computed: {
+      options: function() {
+        return {
+          chart: {
+            type: 'bar'
+          },
+          plotOptions: {
+            bar: {
+              horizontal: true
+            }
+          },
+          series: [{
+            data: this.stats.most_selected_pokemon.map(item => { return { x: item.name, y: item.total } })
+          }]
+        }
+      }
     },
     methods: {
       getStats: function() {

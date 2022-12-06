@@ -6,6 +6,9 @@ Vue.config.productionTip = false
 import vuetify from "./plugins/vuetify.js";
 import routes from "./routes/routes.js";
 
+import VueApexCharts from 'vue-apexcharts'
+Vue.component('poke-charts', VueApexCharts)
+
 Vue.use(VueRouter);
 
 import VueRouter from "vue-router";

@@ -2,16 +2,18 @@
   <nav>
     <v-navigation-drawer :xs2="$vuetify.breakpoint.mobile" v-model="displayed" class="sidebar" color="#ffffff" plain
       flat app>
-      <v-list shaped dense nav class="mt-15">
+      <v-list shaped dense nav class="mt-16">
         <v-list-item>
           <v-list-item-content>
-            <v-list-item-title class="text-h6"> </v-list-item-title>
-            <v-list-item-subtitle> </v-list-item-subtitle>
+            <v-img 
+              src="https://vipyme-templates.s3.us-west-2.amazonaws.com/redpda/logo.png"
+              class="logo"
+            />
           </v-list-item-content>
         </v-list-item>
 
         <v-divider></v-divider>
-        <v-list-item-group v-model="selectedItem" color="#fed330">
+        <v-list-item-group v-model="selectedItem" color="#c64444">
           <v-list-item v-for="(item, i) in items" :key="i" :ripple="false" :to="item.to">
             <v-list-item-icon>
               <v-icon small v-text="item.icon"></v-icon>
@@ -88,18 +90,4 @@ export default {
   font-weight: 600;
   box-shadow: 0 10px 10px 0 rgba(0, 0, 0, 0.05);
 }
-
-/*
-.link-module:hover {
-  text-decoration: none;
-}
-
-.csi-nav-button {
-  visibility: visible;
-}
-
-.icon-sidebar-active {
-  background-image: #fff;
-  color: #fff;
-} */
 </style>

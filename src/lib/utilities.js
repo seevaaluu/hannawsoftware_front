@@ -106,7 +106,7 @@ function getPokemonColorsType() {
  * 
  */
 function getApiHost()  {
-    return 'http://localhost:8000/';
+    return 'http://localhost:8000';
 }
 
 if (window) {

@@ -9,6 +9,13 @@ import routes from "./routes/routes.js";
 import VueApexCharts from 'vue-apexcharts'
 Vue.component('poke-charts', VueApexCharts)
 
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
+
 Vue.use(VueRouter);
 
 import VueRouter from "vue-router";

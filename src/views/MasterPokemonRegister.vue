@@ -94,6 +94,9 @@
             </v-card-text>
 
             <v-card-actions>
+              <v-btn color="#c64444" outlined @click="step = 1">
+                Regresar
+              </v-btn>
               <v-spacer></v-spacer>
               <v-btn color="#f4b615" :disabled="(selected.length < 6)" style="color: white;" @click="storeTrainerPokemon">
                 Guardar
@@ -104,7 +107,7 @@
       </v-card-text>
     </v-card>
     <!--  -->
-    <v-snackbar :value="snackbar.visible" absolute bottom color="success" outlined right>
+    <v-snackbar :value="snackbar.visible" :loading="vBtn.loading" absolute bottom color="success" outlined right>
       {{ snackbar.text }}
     </v-snackbar>
   </v-card>
@@ -112,7 +115,7 @@
 
 <script>
   import axios from 'axios';
-  import errorHandling from './../lib/utilities.js'
+  import errorHandling, { getApiHost } from './../lib/utilities.js'
 
   export default {
     data: () => ({
@@ -121,6 +124,9 @@
       snackbar: {
         visible: false,
         text: null
+      },
+      vBtn: {
+        loading: false,
       },
       selected: [],
       checkbox: false,
@@ -137,7 +143,7 @@
     },
     methods: {
       getPokemons: function() {
-        axios.get('https://pokeapi.co/api/v2/pokemon?limit=15&offset=0')
+        axios.get('https://pokeapi.co/api/v2/pokemon?limit=36&offset=0')
         .then(response => this.data = response.data.results)
         .catch(error => errorHandling(error))
       },
@@ -151,7 +157,8 @@
         return urlPokemon;
       },
       storeTrainerPokemon: function() {
-        axios.post('http://localhost:8000/api/entrenadores', {
+        this.vBtn.loading = true;
+        axios.post(`${getApiHost()}/api/entrenadores`, {
           ...this.personalData,
           'pokemons': this.selected
         })
@@ -163,6 +170,7 @@
           }, 1500);
         })
         .catch(error => console.log(error))
+        .finally(() => this.vBtn.loading = false)
       }
     },
     created() {

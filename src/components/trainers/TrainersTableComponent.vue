@@ -48,11 +48,13 @@
               </v-simple-table>
             </v-card-text>
             <v-card-actions>
+              <v-spacer></v-spacer>
               <paginator
                 :limit="10" 
                 :data="trainers" 
                 @pagination-change-page="getTrainers"
               />
+              <v-spacer></v-spacer>
             </v-card-actions>
           </v-card>
         </v-col>

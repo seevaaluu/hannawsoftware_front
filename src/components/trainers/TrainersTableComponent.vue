@@ -109,4 +109,8 @@
   .col-table { 
     color: blanchedalmond;
   }
+
+  .container {
+    width: 100%;
+  }
 </style>

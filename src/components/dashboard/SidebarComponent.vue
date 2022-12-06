@@ -48,6 +48,7 @@ export default {
       items: [
         { title: "Dashboard", to: "/home", icon: "dashboard", kind: "home" },
         { title: "Entrenadores", to: "/entrenadores", icon: "groups", kind: "entrenadores" },
+        { title: "Configuraciones", to: "/configuraciones", icon: "settings", kind: "configuraciones" },
       ],
       selectedItem: 0,
       drawer: null,

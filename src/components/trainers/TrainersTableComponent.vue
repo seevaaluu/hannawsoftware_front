@@ -31,6 +31,7 @@
                       <td>
                         <v-btn 
                           v-for="(pokemon, i) in item.pokemons" 
+                          @click="openPokemonDetails(pokemon.id_api)"
                           color="secondary" 
                           :key="i" 
                           class="mr-1"
@@ -57,29 +58,43 @@
         </v-col>
       </v-row>
     </v-container>
+    <!-- Modals -->
+    <pokemon-detail-modal 
+      :show.sync="showPokemonDetails"
+      :pokemon-id="currentApiPokemonId"
+    />
   </div>
 </template>
 
 <script>
-  import { errorHandling } from '@/lib/utilities';
   import axios from 'axios';
+  import { errorHandling } from '@/lib/utilities';
+
+  import PokemonDetailModal from '../pokemons/PokemonDetailModalComponent.vue'
 
   export default {
     data() {
       return {
         trainers: {
           data: []
-        }
+        },
+        currentApiPokemonId: null,
+        showPokemonDetails: false,
       }
     },
     components: {
-      paginator: require('laravel-vue-pagination')
+      paginator: require('laravel-vue-pagination'),
+      PokemonDetailModal
     },  
     methods: {
       getTrainers: function(page = 1) {
         axios.get(`http://localhost:8000/api/entrenadores?page=${page}`)
         .then(response => this.trainers = response.data)
         .catch(error => errorHandling(error))
+      },
+      openPokemonDetails: function(apiPokemonId) {
+        this.currentApiPokemonId = apiPokemonId;
+        this.showPokemonDetails = true;
       }
     },
     created() {

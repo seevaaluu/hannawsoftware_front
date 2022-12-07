@@ -59,8 +59,8 @@
   export default {
     data() {
       return {
-        email: null,
-        password: null
+        email: 'sergio@hannahsoftware.com.mx',
+        password: 'aSDK!3412'
       };
     },
     methods: {
@@ -69,6 +69,7 @@
           email: this.email, 
           password: this.password
         })
+        this.$router.push({ name: 'home'})
       }
     }
   }

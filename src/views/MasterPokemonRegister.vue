@@ -17,8 +17,7 @@
       </v-toolbar>
 
       <v-divider></v-divider>
-
-      <v-card-text>
+      <v-card-text v-if="setting.value == 0">
         <v-window v-model="step">
           <v-window-item :value="1">
             <v-card-text>
@@ -108,6 +107,17 @@
           </v-window-item>
         </v-window>
       </v-card-text>
+
+      <v-card-text v-else>
+        <v-alert
+          color="#c64444"
+          dark
+          icon="warning"
+          dense
+        >
+          El registro se encuentra suspendido por el momento
+        </v-alert>
+      </v-card-text>
     </v-card>
     <!--  -->
     <v-snackbar :value="snackbar.visible" :loading="vBtn.loading" absolute bottom color="success" outlined right>
@@ -124,6 +134,9 @@
     data: () => ({
       step: 1,
       personalData: {},
+      setting: {
+        value: 0
+      },
       snackbar: {
         visible: false,
         text: null
@@ -177,10 +190,16 @@
         })
         .catch(error => console.log(error))
         .finally(() => this.vBtn.loading = false)
+      },
+      getSetting: function() {
+        axios.get(`${getApiHost()}/api/configuraciones/disable_form`)
+        .then(response => this.setting =  response.data)
+        .catch(error => errorHandling(error))
       }
     },
     created() {
       this.getPokemons();
+      this.getSetting();
     }
   }
 </script>

@@ -29,18 +29,25 @@
                       <td>{{ item.id_user}}</td>
                       <td>{{ item.name }}  {{ item.last_name }}  {{ item.second_last_name }}</td>
                       <td>
-                        <v-btn 
-                          v-for="(pokemon, i) in item.pokemons" 
-                          @click="openPokemonDetails(pokemon.id_api)"
-                          color="secondary" 
-                          :key="i" 
-                          class="mr-1"
-                          outlined 
-                          x-small 
-                          dark
-                        >
-                          {{ pokemon.name }}
-                        </v-btn>
+                        <v-tooltip bottom>
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-btn 
+                              v-for="(pokemon, i) in item.pokemons" 
+                              @click="openPokemonDetails(pokemon.id_api)"
+                              color="secondary" 
+                              :key="i" 
+                              class="mr-1"
+                              outlined 
+                              x-small 
+                              dark
+                              v-on="on"
+                              v-bind="attrs"
+                            >
+                              {{ pokemon.name }}
+                            </v-btn>
+                          </template>
+                          <span>Click para ver detalles</span>
+                        </v-tooltip>
                       </td>
                     </tr>
                   </tbody>

@@ -59,8 +59,8 @@
   export default {
     data() {
       return {
-        email: 'sergio@hannahsoftware.com.mx',
-        password: 'aSDK!3412'
+        email: null,
+        password: null
       };
     },
     methods: {

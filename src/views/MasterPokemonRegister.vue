@@ -38,7 +38,7 @@
                     </v-col>
 
                     <v-col cols="12" md="12">
-                      <v-text-field label="Email" filled v-model="personalData.email" :rules="rules" />
+                      <v-text-field label="Email" filled v-model="personalData.email" :rules="emailRules" />
                     </v-col>
 
                     <v-col cols="12" md="12">
@@ -135,6 +135,9 @@
       checkbox: false,
       data: [],
       validForm: false,
+      emailRules: [
+        v => /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'Ingresa un formato válido'
+      ],
       rules: [(v) => !!v || "Este campo es requerido"],
     }),
     watch: {

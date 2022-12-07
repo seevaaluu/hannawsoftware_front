@@ -37,7 +37,7 @@
                     </v-col>
 
                     <v-col cols="12" md="12">
-                      <v-text-field label="Email" filled v-model="personalData.email" :rules="emailRules" />
+                      <v-text-field label="Email" filled v-model="personalData.email" :rules="rules" />
                     </v-col>
 
                     <v-col cols="12" md="12">
@@ -128,7 +128,7 @@
 
 <script>
   import axios from 'axios';
-  import errorHandling, { getApiHost } from './../lib/utilities.js'
+  import { getApiHost, errorHandling } from './../lib/utilities.js'
 
   export default {
     data: () => ({
@@ -188,7 +188,7 @@
             location.reload(); 
           }, 1500);
         })
-        .catch(error => console.log(error))
+        .catch(error => errorHandling(error))
         .finally(() => this.vBtn.loading = false)
       },
       getSetting: function() {

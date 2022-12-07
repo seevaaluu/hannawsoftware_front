@@ -2,6 +2,7 @@
  * 
  * @param {*} error 
  */
+/*eslint-disable */
 function errorHandling(error) {
     if (typeof alertify == 'undefined') {
         alert('Alertify is not defined')
@@ -19,30 +20,30 @@ function errorHandling(error) {
     }
 
     if (error.response.status === 403) {
-        console.log('Error, no tienes permiso para realizar esa acción')
+        alertify.error('Error, no tienes permiso para realizar esa acción')
         throw error
     }
 
     if (!error.response.data) {
-        console.log('Error desde el servidor')
+        alertify.error('Error desde el servidor')
         throw error
     }
 
     if (error.response.data.message_type === 'error') {
-        console.log(error.response.data.message_text)
+        alertify.error(error.response.data.message_text)
         throw error
     }
 
     if (!error.response.data.message_text) {
         if (error.response.status === 422) {
             for (const field in error.response.data.errors) {
-                error.response.data.errors[field].forEach(error => console.log(error))
+                error.response.data.errors[field].forEach(error => alertify.error(error))
             }
         } else {
             if (error.response.status == 503) {
-                console.log('Actualización en proceso. Por favor espere unos minutos y reintente')
+                alertify.error('Actualización en proceso. Por favor espere unos minutos y reintente')
             } else {
-                console.log('Error Inesperado, reintente')
+                alertify.error('Error Inesperado, reintente')
                 console.error(error.response)
             }
         }
@@ -50,11 +51,11 @@ function errorHandling(error) {
     }
 
     if (error.response.statusText !== 'OK') {
-        console.log('Error Inesperado! Intente volver a iniciar sesión.')
+        alertify.error('Error Inesperado! Intente volver a iniciar sesión.')
         throw error
     }
 
-    console.log('Error Inesperado! Intente volver a iniciar sesión.')
+    alertify.error('Error Inesperado! Intente volver a iniciar sesión.')
     throw error
 }
 
@@ -64,7 +65,7 @@ function errorHandling(error) {
  */
 function laravelRoute(...args) {
     if (typeof window.route == 'undefined') {
-        alert('route is not defined')
+        console.log('route is not defined')
         throw Error('Utility Error')
     }
     return window.route(...args).toString()

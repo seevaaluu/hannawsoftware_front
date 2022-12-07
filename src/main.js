@@ -18,6 +18,8 @@ Vue.use(IconsPlugin)
 
 Vue.use(VueRouter);
 
+import store from '@/store/index.js'
+
 import VueRouter from "vue-router";
 
 const router = new VueRouter({
@@ -25,8 +27,11 @@ const router = new VueRouter({
   mode: "history",
 });
 
+
+
 new Vue({
   router,
   vuetify,
+  store,
   render: h => h(App),
 }).$mount('#app')

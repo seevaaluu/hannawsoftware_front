@@ -55,8 +55,6 @@
 </template>
 
 <script>
-  import { errorHandling, getApiHost } from '@/lib/utilities';
-  import axios from 'axios'; 
 
   export default {
     data() {
@@ -66,19 +64,11 @@
       };
     },
     methods: {
-      
-      getAuth: function() {
-        axios.get(`${getApiHost()}/sanctum/csrf-cookie`)
-        .then(() => {
-          axios.post(`${getApiHost()}/api/login`, {
-            email: this.email,
-            password: this.password
-          })
-          .then(response => {
-            console.log(response.data)
-          })
-          .catch(error => errorHandling(error))
-        });
+      async getAuth() {
+        await this.$store.dispatch('login', {
+          email: this.email, 
+          password: this.password
+        })
       }
     }
   }

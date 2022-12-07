@@ -66,24 +66,24 @@
     background-color: #0190ff;
     height: 102vh;
   }
-    .custom-shape-divider-bottom-1670016865 {
-      position: absolute;
-      bottom: -1%;
-      left: 0;
-      width: 52%;
-      overflow: hidden;
-      line-height: 0;
-      transform: rotate(180deg);
-    }
-  
-    .custom-shape-divider-bottom-1670016865 svg {
-      position: relative;
-      display: block;
-      width: calc(282% + 1.3px);
-      height: 238px;
-    }
-  
-    .custom-shape-divider-bottom-1670016865 .shape-fill {
-      fill: #FFFFFF;
-    }
+  .custom-shape-divider-bottom-1670016865 {
+    position: absolute;
+    bottom: -1%;
+    left: 0;
+    width: 101%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+  }
+
+  .custom-shape-divider-bottom-1670016865 svg {
+    position: relative;
+    display: block;
+    width: calc(282% + 1.3px);
+    height: 238px;
+  }
+
+  .custom-shape-divider-bottom-1670016865 .shape-fill {
+    fill: #FFFFFF;
+  }
 </style>

@@ -7,3 +7,13 @@
     </v-btn>
   </v-toolbar>
 </template>
+
+<script>
+  export default {
+    created() {
+      if(!this.$store.state.auth) {
+        this.$router.push({ name: 'login' })
+      }
+    }
+  }
+</script>

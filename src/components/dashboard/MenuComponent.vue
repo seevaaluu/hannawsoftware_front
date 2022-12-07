@@ -10,7 +10,7 @@
 
 <script>
   import { errorHandling, getApiHost } from '@/lib/utilities';
-import axios from 'axios';
+  import axios from 'axios';
 
   export default {
     methods: {

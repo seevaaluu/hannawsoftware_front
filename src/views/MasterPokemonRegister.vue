@@ -1,7 +1,10 @@
 <template>
   <v-card flat class="main-v-card">
     <v-toolbar color="#c64444" dark extended flat>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-spacer></v-spacer>
+      <v-btn to="login" class="ma-2" text icon color="white">
+        <v-icon>person</v-icon>
+      </v-btn>
     </v-toolbar>
 
     <v-card class="mx-auto" max-width="700" style="margin-top: -64px;">

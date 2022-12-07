@@ -38,12 +38,12 @@
                 </v-toolbar>
                 <v-card-text>
                   <v-form>
-                    <v-text-field name="email" label="Correo" type="email" placeholder="Email" />
-                    <v-text-field name="password" label="Contraseña" type="password" placeholder="Contraseña" />
+                    <v-text-field v-model="email" name="email" label="Correo" type="email" placeholder="Email" />
+                    <v-text-field v-model="password" name="password" label="Contraseña" type="password" placeholder="Contraseña" />
                   </v-form>
                 </v-card-text>
                 <v-card-actions>
-                  <v-btn type="submit" dark block class="mt-4" color="#fed330">Entrar</v-btn>
+                  <v-btn @click="getAuth()" dark block class="mt-4" color="#fed330">Entrar</v-btn>
                 </v-card-actions>
               </v-card>
             </v-flex>
@@ -53,6 +53,37 @@
     </v-row>
   </div>
 </template>
+
+<script>
+  import { errorHandling, getApiHost } from '@/lib/utilities';
+  import axios from 'axios'; 
+
+  export default {
+    data() {
+      return {
+        email: 'sergio@hannahsoftware.com.mx',
+        password: 'aSDK!3412'
+      };
+    },
+    methods: {
+      
+      getAuth: function() {
+        axios.get(`${getApiHost()}/sanctum/csrf-cookie`)
+        .then(() => {
+          axios.post(`${getApiHost()}/api/login`, {
+            email: this.email,
+            password: this.password
+          })
+          .then(response => {
+            console.log(response.data)
+          })
+          .catch(error => errorHandling(error))
+        });
+      }
+    }
+  }
+
+</script>
 
 <style scoped>
 .login-container {
